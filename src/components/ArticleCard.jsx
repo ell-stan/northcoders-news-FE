@@ -1,4 +1,5 @@
 import "../index.css";
+import { Link } from "react-router";
 
 function ArticleCard({ article }) {
   const {
@@ -9,12 +10,18 @@ function ArticleCard({ article }) {
     votes,
     comment_count,
     article_img_url,
+    article_id,
   } = article;
   return (
     <section className="article-card">
       <img src={article_img_url} alt={`Image for article titled ${title}`} />
       <div className="article-text">
-        <h3>{title}</h3>
+        <Link
+          to={`/articles/${article_id}`}
+          aria-label="to read the body of this article, click the title heading"
+        >
+          <h3 aria-label="title heading">{title}</h3>
+        </Link>
         <p>Topic: {topic}</p>
         <p>Posted by: {author}</p>
         <p>Date: {created_at}</p>

@@ -15,11 +15,11 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: #2c79d3;
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+  color: #2c79d3;
 }
 
 body {
@@ -104,4 +104,33 @@ button:focus-visible {
 .article-text p {
   font-size: 1.2rem;
   margin: 0.25em 0;
+}
+
+.article-body-text {
+  text-align: left;
+  margin: 20px 50px 20px 50px;
+}
+
+@media (max-width: 768px) {
+  .article-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .article-card img {
+    height: 300px;
+    width: 300px;
+    object-fit: cover;
+  }
+
+  .article-text {
+    align-items: center;
+    padding-top: 20px;
+  }
+
+  .article-body-text {
+    margin: 20px;
+    text-align: left;
+  }
 }
