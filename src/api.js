@@ -5,14 +5,15 @@ const ncNewsApi = axios.create({
 });
 
 export const getAllArticles = () => {
-  return ncNewsApi.get(`/articles?sort_by=created_at`).then((res) => {
+  return ncNewsApi.get(`/articles`).then((res) => {
     const { articles } = res.data;
     return articles;
   });
 };
 
-// export const getAllArticles = () => {
-//   return ncNewsApi.get(`/articles?sort_by=created_at`).then((res) => {
-//     return res.data.articles;
-//   });
-// };
+export const getArticleById = (articleId) => {
+  return ncNewsApi.get(`/articles/${articleId}`).then((res) => {
+    const { article } = res.data;
+    return article;
+  });
+};
