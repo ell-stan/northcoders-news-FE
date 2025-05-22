@@ -11,9 +11,20 @@ export const getAllArticles = () => {
   });
 };
 
-export const getArticleById = (articleId) => {
-  return ncNewsApi.get(`/articles/${articleId}`).then((res) => {
-    const { article } = res.data;
-    return article;
-  });
+export const getArticleAndComments = async (articleId) => {
+  console.log("fetch func running");
+  try {
+    const [articleRes, commentsRes] = await Promise.all([
+      ncNewsApi.get(`/articles/${articleId}`),
+      ncNewsApi.get(`/articles/${articleId}/comments`),
+    ]);
+
+    return {
+      article: articleRes.data.article,
+      comments: commentsRes.data.comments,
+    };
+  } catch (error) {
+    console.error("Error fetching article or comments:", error);
+    throw error;
+  }
 };

@@ -1,41 +1,48 @@
 import "../index.css";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router";
-import { getArticleById } from "../api";
+import { getArticleAndComments } from "../api";
+import CommentCard from "./CommentCard";
 
 function Article() {
   const { articleId } = useParams();
   const [article, setArticle] = useState(null);
+  const [comments, setComments] = useState([]);
 
   useEffect(() => {
-    getArticleById(articleId)
-      .then((data) => {
-        setArticle(data);
+    getArticleAndComments(articleId)
+      .then(({ article, comments }) => {
+        setArticle(article);
+        setComments(comments);
       })
       .catch((err) => {
-        console.error("Error fetching article:", err);
+        console.error("Failed to load article or comments:", err);
       });
   }, [articleId]);
 
   if (!article) return <p>Loading...</p>;
 
-  const { article_img_url, title, topic, body, created_at, votes, author } =
-    article;
-
   return (
-    <section className="article-card">
-      <img src={article_img_url} alt={`Image for ${title}`} />
-      <div className="article-text">
-        <h2>{title}</h2>
-        <p>Topic: {topic}</p>
-        <p>Posted by: {author}</p>
-        <div className="article-body-text">
-          <p>{body}</p>
+    <>
+      <section className="article-card">
+        <img src={article.article_img_url} alt={`Image for ${article.title}`} />
+        <div className="article-text">
+          <h3>{article.topic}</h3>
+          <h4>{article.author}</h4>
+          <h2>{article.title}</h2>
+          <div className="article-body-text">
+            <p>{article.body}</p>
+          </div>
+          <p>{article.created_at}</p>
+          <p>{article.votes} votes</p>
         </div>
-        <p>Date: {created_at}</p>
-        <p>Votes: {votes}</p>
-      </div>
-    </section>
+      </section>
+      <section className="comment-list">
+        {comments.map((comment) => (
+          <CommentCard key={comment.comment_id} comment={comment} />
+        ))}
+      </section>
+    </>
   );
 }
 
