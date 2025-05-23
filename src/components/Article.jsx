@@ -1,6 +1,6 @@
 import "../index.css";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router";
+import { useParams, Link } from "react-router";
 import { getArticleAndComments } from "../api";
 import CommentCard from "./CommentCard";
 import Vote from "./Vote";
@@ -36,6 +36,9 @@ function Article() {
           </div>
           <p>{article.created_at}</p>
           <Vote articleId={articleId} article={article} />
+          <Link to={`/articles/${articleId}/newComment`}>
+            <button>Reply to article</button>
+          </Link>
         </div>
       </section>
       <section className="comment-list">

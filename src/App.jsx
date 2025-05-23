@@ -8,6 +8,8 @@ function App() {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  const username = "jessjelly";
+
   useEffect(() => {
     setLoading(true);
 
@@ -24,7 +26,11 @@ function App() {
   return (
     <section>
       <Header />
-      {loading ? <p>Loading...</p> : <AppRoutes articles={articles} />}
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        <AppRoutes articles={articles} username={username} />
+      )}
     </section>
   );
 }
