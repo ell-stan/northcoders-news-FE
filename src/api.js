@@ -34,3 +34,14 @@ export const patchArticleVotes = (articleId, voteValue) => {
     inc_votes: voteValue,
   });
 };
+
+export const postNewComment = (articleId, username, newCommentBody) => {
+  return ncNewsApi
+    .post(`/articles/${articleId}/comments`, {
+      username,
+      body: newCommentBody,
+    })
+    .then((res) => {
+      return res.data.comment;
+    });
+};
