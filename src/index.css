@@ -145,3 +145,27 @@ button:focus-visible {
 .comment-card {
   border-bottom: 3px solid #4d78f5;
 }
+
+.button-container {
+  display: flex;
+  justify-content: center;
+}
+
+.vote-button {
+  margin: 6px;
+  height: 50px;
+  width: 90px;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.vote-clicked {
+  margin: 6px;
+  height: 50px;
+  width: 90px;
+  background-color: #4d78f5;
+}
+
+.error-message {
+  border: 10px solid #e51a52;
+}

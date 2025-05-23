@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import { getArticleAndComments } from "../api";
 import CommentCard from "./CommentCard";
+import Vote from "./Vote";
 
 function Article() {
   const { articleId } = useParams();
@@ -34,7 +35,7 @@ function Article() {
             <p>{article.body}</p>
           </div>
           <p>{article.created_at}</p>
-          <p>{article.votes} votes</p>
+          <Vote articleId={articleId} article={article} />
         </div>
       </section>
       <section className="comment-list">

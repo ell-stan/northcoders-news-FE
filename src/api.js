@@ -12,7 +12,6 @@ export const getAllArticles = () => {
 };
 
 export const getArticleAndComments = async (articleId) => {
-  console.log("fetch func running");
   try {
     const [articleRes, commentsRes] = await Promise.all([
       ncNewsApi.get(`/articles/${articleId}`),
@@ -27,4 +26,11 @@ export const getArticleAndComments = async (articleId) => {
     console.error("Error fetching article or comments:", error);
     throw error;
   }
+};
+
+export const patchArticleVotes = (articleId, voteValue) => {
+  return ncNewsApi.patch(`/articles/${articleId}`, {
+    article_id: articleId,
+    inc_votes: voteValue,
+  });
 };
